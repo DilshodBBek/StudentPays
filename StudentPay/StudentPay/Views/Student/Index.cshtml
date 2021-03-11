@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Customer.Models.Student>
+
+@{
+    ViewData["Title"] = "Students list";
+}
+
+<h1>Students list</h1>
+
+<p>
+    <a asp-action="Create" asp-controller="Student">Create New Student</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Payments
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>
+                <a asp-controller="Pay" asp-action="Index" asp-area="@item.Id" asp-route-StudentId="@item.Id" asp-route-StudentName="@item.Name">All payments</a> |
+                <a asp-controller="Pay" asp-action="Create" asp-route-studentId="@item.Id">Add payment</a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-studentid="@item.Id">Edit</a> |
+                <a asp-action="Delete" asp-route-studentid="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+
+    </tbody>
+</table>

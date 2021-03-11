@@ -1,0 +1,67 @@
+﻿@model IEnumerable<StudentPay.Models.Payment>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@if (ViewBag.studentid!=null)
+{
+    <h1>@ViewBag.StudentName all payments for study</h1>
+}
+else
+{
+    <h1>All payments</h1>
+}
+<p>
+    <a asp-controller="Student" asp-action="Index">Students List</a>
+    @if (ViewBag.studentid != null)
+    {
+     <b> | </b>  <a asp-action="Create" asp-route-studentId="@ViewBag.studentid">Create new Payment</a>
+    }
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pay_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PayAmount)
+            </th>
+            @if (ViewBag.studentid == null)
+            {
+                <th>Student</th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pay_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PayAmount)
+            </td>
+            @if (ViewBag.studentid == null)
+            {
+        <td>
+            @Html.DisplayFor(modelItem => item._Student.Name)
+        </td>
+            }
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Pay_ID" asp-route-studentId="@ViewData["StudentId"]">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.Pay_ID">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

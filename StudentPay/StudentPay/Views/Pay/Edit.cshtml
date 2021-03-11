@@ -1,0 +1,43 @@
+﻿@model StudentPay.Models.Payment
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit Payment</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Pay_ID" />
+            <input type="hidden" asp-for="_Student" />
+            <div class="form-group">
+                <label asp-for="Pay_Name" class="control-label"></label>
+                <input asp-for="Pay_Name" class="form-control" />
+                <span asp-validation-for="Pay_Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayDate" class="control-label"></label>
+                <input asp-for="PayDate" class="form-control" />
+                <span asp-validation-for="PayDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayAmount" class="control-label"></label>
+                <input asp-for="PayAmount" class="form-control" />
+                <span asp-validation-for="PayAmount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-route-StudentId="@Model._Student.Id">Back to payments list</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
